@@ -24,7 +24,7 @@ deployments:
   - name: trade_to_ohlc
     application: trade_to_ohlc
     deploymentType: Service
-    version: 39a63bf38e49b1f2ce96b621d6ce33a68e0d1281
+    version: b030614e018d944754a1321bd5b55e9c819201af
     resources:
       cpu: 200
       memory: 500
