@@ -44,7 +44,7 @@ deployments:
   - name: ohlc_to_feature_store
     application: ohlc_to_feature_store
     deploymentType: Service
-    version: f4e6564a0cf6912306bf2acdbae3de253980aac5
+    version: 3466bb8cb2526e66f822699bbd60fbc1d3637018
     resources:
       cpu: 200
       memory: 500
