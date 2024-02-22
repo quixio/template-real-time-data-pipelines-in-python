@@ -29,10 +29,10 @@ st.set_page_config(
 
 st.header("Real-Time OHLC data", divider="blue")
 st.markdown(
-"""This dashboard vizualizes real-time OHLC data computed from Kraken API using [Quix Streams](https://github.com/quixio/quix-streams).
-
-* To explore the back-end services that power this Dashboard, check out [this repository](https://github.com/Paulescu/real-time-data-pipelines-in-python)
-
+"""
+* This dashboard vizualizes real-time OHLC data computed from Kraken API using **Quix Streams** ⚡
+* To explore the back-end services that power this Dashboard, check out [this repository](https://github.com/Paulescu/real-time-data-pipelines-in-python) ✨
+* Wanna learn to build real-world ML apps like this? Subscribe for **[FREE](https://www.realworldml.xyz/subscribe)** to the [Real-World ML Newsletter](https://www.realworldml.xyz/subscribe)🚀
 """)
 
 default_height = 1000
@@ -58,7 +58,7 @@ while True:
     features : pd.DataFrame = get_features(last_minutes=LAST_MINUTES)
 
     # add column with datetime UTC from features['timestamp']
-    features['datetime'] = pd.to_datetime(features['timestamp'], unit='s', utc=True)
+    features['datetime'] = pd.to_datetime(features['timestamp'], unit='ms', utc=True)
     
     with placeholder_col11.container():    
         # plot it as Streamlit Dataframe

@@ -9,7 +9,7 @@ deployments:
   - name: trade_producer
     application: trade_producer
     deploymentType: Service
-    version: 8f1847760b5847b4b72d730e648359616a772ad0
+    version: 6a2973a1ca622f1d33e6586cb017a72ea89840a0
     resources:
       cpu: 200
       memory: 500
@@ -24,7 +24,7 @@ deployments:
   - name: trade_to_ohlc
     application: trade_to_ohlc
     deploymentType: Service
-    version: b030614e018d944754a1321bd5b55e9c819201af
+    version: 684b3d2affc25f6c03ba283b495b1279d66e244b
     resources:
       cpu: 200
       memory: 500
@@ -44,7 +44,7 @@ deployments:
   - name: ohlc_to_feature_store
     application: ohlc_to_feature_store
     deploymentType: Service
-    version: 3466bb8cb2526e66f822699bbd60fbc1d3637018
+    version: 6a2973a1ca622f1d33e6586cb017a72ea89840a0
     resources:
       cpu: 200
       memory: 500
@@ -66,18 +66,18 @@ deployments:
         description: ''
         required: true
         secretKey: HOPSWORKS_API_KEY
-  - name: streamlit-app
+  - name: streamlit-app-old
     application: dashboard
     deploymentType: Service
-    version: 74a66ae9a847d26a51585141b8aa32e1b2ebd3be
+    version: 6a2973a1ca622f1d33e6586cb017a72ea89840a0
     resources:
       cpu: 200
       memory: 500
       replicas: 1
     publicAccess:
       enabled: true
-      urlPrefix: dashboard
-    desiredStatus: Running
+      urlPrefix: dashboard-2
+    desiredStatus: Stopped
     variables:
       - name: HOPSWORKS_PROJECT_NAME
         inputType: Secret
@@ -89,17 +89,17 @@ deployments:
         description: ''
         required: true
         secretKey: HOPSWORKS_API_KEY
-  - name: streamlit-app 2
+  - name: streamlit-app
     application: dashboard
     deploymentType: Service
-    version: 23327f7e96b2d31731c5f36f53dc820bdf2da87c
+    version: 0d6ec8dced8122de9de0e0343a9b6e0c8040301b
     resources:
       cpu: 200
       memory: 500
       replicas: 1
     publicAccess:
       enabled: true
-      urlPrefix: streamlit
+      urlPrefix: dashboard
     desiredStatus: Running
     variables:
       - name: HOPSWORKS_PROJECT_NAME
@@ -129,3 +129,11 @@ topics:
       replicationFactor: 3
       retentionInMinutes: 1440
       retentionInBytes: 52428800
+  - name: changelog__qts__trade_to_ohlc_consumer_group--trades_topic--tumbling_window_10000_reduce
+    persisted: false
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: 1440
+      retentionInBytes: 52428800
+      cleanupPolicy: Compact
