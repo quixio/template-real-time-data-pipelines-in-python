@@ -58,7 +58,7 @@ class FeatureView:
             )
         except Exception as e:
             print(f"Failed to read data for keys: {e}")
-
+            return pd.DataFrame()  # Return an empty DataFrame
 
 
 
