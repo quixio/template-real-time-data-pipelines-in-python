@@ -1,12 +1,11 @@
-from typing import Optional, Dict
+from typing import Optional, Dict, Any
 import os
-import json
 import logging
 
-from quixstreams.kafka import Producer
-from quixstreams.platforms.quix import QuixKafkaConfigsBuilder, TopicCreationConfigs
+from quixstreams.app import Application
 
 logger = logging.getLogger()
+
 
 class ProducerWrapper:
     """
@@ -15,58 +14,50 @@ class ProducerWrapper:
     - using local Kafka cluster or
     - Quix Kafka cluster.
     """
+
     def __init__(
         self,
         kafka_topic: str,
         use_local_kafka: Optional[bool] = False,
     ):
-        self._kafka_topic = kafka_topic
-        self._producer = None
 
         if use_local_kafka:
-            
+
             logger.info("Connecting to Local Kafka cluster...")
 
-            # Connect to local Kafka cluster.
-            self._producer = Producer(
+            app = Application(
                 broker_address=os.environ["KAFKA_BROKER_ADDRESS"],
-                extra_config={"allow.auto.create.topics": "true"},
+                consumer_group="ignored",
             )
+
+            self._kafka_topic = app.topic(kafka_topic)
+
         else:
             logger.info("Connecting to Quix Kafka cluster...")
 
-            # Connect to Quix Kafka cluster.
-            topic = kafka_topic
-            cfg_builder = QuixKafkaConfigsBuilder()
-            cfgs, topics, _ = cfg_builder.get_confluent_client_configs([topic])
-            topic = topics[0]
+            app = Application.Quix(consumer_group="ignored")
 
-            # Use the topic name returned by "cfg_builder". 
-            # "cfg_builder" adds a prefix to the topic name that is required by the Quix platform
-            self._kafka_topic = topic
-
-            cfg_builder.create_topics([TopicCreationConfigs(name=topic)])
+            self._kafka_topic = app.topic(kafka_topic)
 
             # self._serialize = QuixTimeseriesSerializer()
 
-            self._producer = Producer(
-                broker_address=cfgs.pop("bootstrap.servers"),
-                extra_config=cfgs
-            )
-            
+        # calling get_producer() also creates any Application-generated topics.
+        self._producer = app.get_producer()
+
     def produce(
-        self,
-        key,
-        value: Dict[str, any],
-        headers=None,
-        partition=None,
-        timestamp=None
-    ):    
+            self,
+            key,
+            value: Dict[str, Any],
+            headers=None,
+            partition=None,
+            timestamp=None
+    ):
+        serialized = self._kafka_topic.serialize(key=key, value=value, headers=headers)
         self._producer.produce(
-            topic=self._kafka_topic,
-            headers=headers,
-            key=key,
-            value=json.dumps(value),
+            topic=self._kafka_topic.name,
+            headers=serialized.headers,
+            key=serialized.key,
+            value=serialized.value,
         )
 
     def __enter__(self):
