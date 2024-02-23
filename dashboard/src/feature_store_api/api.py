@@ -57,7 +57,7 @@ class FeatureView:
                 return_type="pandas"
             )
         except Exception as e:
-            print(f"Failed to read data for test keys: {e}")
+            print(f"Failed to read data for keys: {e}")
 
 
 
