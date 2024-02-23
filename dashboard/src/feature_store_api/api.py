@@ -50,27 +50,15 @@ class FeatureView:
 
     def read(self, primary_keys: List[Dict[str, Any]]) -> pd.DataFrame:
         
-        # Select a small subset of primary keys that you know exist in the feature view
-        test_keys = primary_keys[:5]  # Adjust this as needed
-
-        # Print the test keys
-        print(f"Test keys: {test_keys}")
-
-        # Try to get the feature vectors for the test keys
         try:
-            df = self._fv.get_feature_vectors(
-                entry=test_keys,
+            # Continue with the original primary keys
+            return self._fv.get_feature_vectors(
+                entry=primary_keys,
                 return_type="pandas"
             )
-            print(f"Successfully read data for test keys: {df}")
         except Exception as e:
             print(f"Failed to read data for test keys: {e}")
 
-        # Continue with the original primary keys
-        return self._fv.get_feature_vectors(
-            entry=primary_keys,
-            return_type="pandas"
-        )
 
 
 
