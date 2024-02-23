@@ -92,7 +92,7 @@ deployments:
   - name: streamlit-app
     application: dashboard
     deploymentType: Service
-    version: b4221636461db33f6d2bd29091e0ad9f99ef3b7f
+    version: ec888ebad5d33affa204e67bee5a563f555b2493
     resources:
       cpu: 200
       memory: 500
