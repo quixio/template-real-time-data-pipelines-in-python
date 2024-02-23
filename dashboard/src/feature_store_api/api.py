@@ -53,6 +53,9 @@ class FeatureView:
         # breakpoint()
         # self._fv.get_feature_vectors(entry=primary_keys)
 
+        # Print the primary keys
+        print(f"Primary keys: {primary_keys}")
+        
         return self._fv.get_feature_vectors(
             entry=primary_keys,
             return_type="pandas"
