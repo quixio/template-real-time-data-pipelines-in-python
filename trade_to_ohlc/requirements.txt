@@ -12,5 +12,4 @@ quixstreams==2.4.1 ; python_version >= "3.10" and python_version < "4"
 requests==2.31.0 ; python_version >= "3.10" and python_version < "4"
 rocksdict==0.3.21 ; python_version >= "3.10" and python_version < "4"
 typing-extensions==4.8.0 ; python_version >= "3.10" and python_version < "4.0"
-quixstreams==2.2.1a
 urllib3==2.2.1 ; python_version >= "3.10" and python_version < "4"
