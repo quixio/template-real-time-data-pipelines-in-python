@@ -9,7 +9,7 @@ deployments:
   - name: trade_producer
     application: trade_producer
     deploymentType: Service
-    version: 53ba0854cc9714ac4ac7defceb6343ceb6c46bbf
+    version: latest
     resources:
       cpu: 200
       memory: 500
@@ -24,7 +24,7 @@ deployments:
   - name: trade_to_ohlc
     application: trade_to_ohlc
     deploymentType: Service
-    version: 684b3d2affc25f6c03ba283b495b1279d66e244b
+    version: latest
     resources:
       cpu: 200
       memory: 500
@@ -44,7 +44,7 @@ deployments:
   - name: ohlc_to_feature_store
     application: ohlc_to_feature_store
     deploymentType: Service
-    version: 6a2973a1ca622f1d33e6586cb017a72ea89840a0
+    version: latest
     resources:
       cpu: 200
       memory: 500
@@ -69,7 +69,7 @@ deployments:
   - name: streamlit-app-old
     application: dashboard
     deploymentType: Service
-    version: 6a2973a1ca622f1d33e6586cb017a72ea89840a0
+    version: latest
     resources:
       cpu: 200
       memory: 500
@@ -92,7 +92,7 @@ deployments:
   - name: streamlit-app
     application: dashboard
     deploymentType: Service
-    version: ec888ebad5d33affa204e67bee5a563f555b2493
+    version: latest
     resources:
       cpu: 200
       memory: 500
@@ -129,11 +129,3 @@ topics:
       replicationFactor: 3
       retentionInMinutes: 1440
       retentionInBytes: 52428800
-  - name: changelog__qts__trade_to_ohlc_consumer_group--trades_topic--tumbling_window_10000_reduce
-    persisted: false
-    configuration:
-      partitions: 1
-      replicationFactor: 3
-      retentionInMinutes: 1440
-      retentionInBytes: 52428800
-      cleanupPolicy: Compact
