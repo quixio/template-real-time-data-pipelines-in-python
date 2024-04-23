@@ -12,8 +12,7 @@ WORKDIR /app
 COPY requirements.txt /app/
 
 # Install the dependencies
-# RUN python3 -m pip install --no-cache-dir -r requirements.txt
-RUN find | grep requirements.txt | xargs -I '{}' python3 -m pip install -r '{}' --extra-index-url https://pkgs.dev.azure.com/quix-analytics/53f7fe95-59fe-4307-b479-2473b96de6d1/_packaging/public/pypi/simple/
+RUN python3 -m pip install -r requirements.txt
 
 # Copy the rest of the application code to the container
 COPY . /app
