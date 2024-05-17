@@ -10,6 +10,7 @@ import json
 from dotenv import load_dotenv
 load_dotenv()
 
+print("HELLO")
 import os
 def print_env_variables():
     for key, value in os.environ.items():
