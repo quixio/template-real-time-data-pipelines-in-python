@@ -6,6 +6,11 @@ variables:
     description: Name of the output topic to write into
     defaultValue: ohlc_topic
     required: true
+  - name: HOPSWORKS_PROJECT_NAME
+    inputType: Secret
+    description: ''
+    defaultValue: HOPSWORKS_PROJECT_NAME
+    required: false
 dockerfile: dockerfile
 runEntryPoint: main.py
 defaultFile: main.py
