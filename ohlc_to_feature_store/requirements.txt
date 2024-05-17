@@ -96,3 +96,4 @@ tzlocal==5.2 ; python_version >= "3.10" and python_version < "3.12"
 urllib3==1.26.18 ; python_version >= "3.10" and python_version < "3.12"
 wcwidth==0.2.13 ; python_version >= "3.10" and python_version < "3.12"
 zipp==3.17.0 ; python_version >= "3.10" and python_version < "3.12"
+dotenv
