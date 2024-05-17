@@ -16,8 +16,3 @@ def print_env_variables():
         print(f"{key}: {value}")
 
 
-if __name__ == "__main__":
-    try:
-        main()
-    except KeyboardInterrupt:
-        print("Exiting.")
